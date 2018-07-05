@@ -1,15 +1,57 @@
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+        this.handlePickOption = this.handlePickOption.bind(this);
+        this.handleAddOption = this.handleAddOption.bind(this);
+        this.state = {
+            options: []
+        };
+    }
+
+    // Method to delete all options
+    handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            };
+        });
+    }
+
+    // Method to randomly select an option from the options array
+    handlePickOption() {
+        this.setState(() => {
+            const randomNum = Math.floor(Math.random() * this.state.options.length);
+            const option = this.state.options[randomNum];
+            alert(option);
+        });
+    }
+
+    // Method to add options into the options array
+    handleAddOption(option) {
+        if (!option) {
+            return 'Must enter a valid value';
+        }else if (this.state.options.indexOf(option) > -1) {
+            return 'Option already exist';
+        }
+
+        this.setState((prevState) => {
+            return {
+                options: prevState.options.concat(option)
+            };
+        });
+    }
+
     render() {
         const title = 'Decidueye';
         const subtitle = 'Can\'t decide? Let an App do it!';
-        const options = ['opt 1', 'opt 2', 'opt 3'];
 
         return(
             <div>
                 <Header title={title} subtitle={subtitle} />
-                <Action />
-                <Options options={options}/>
-                <AddOption />
+                <Action hasOptions={this.state.options.length > 0} handlePickOption={this.handlePickOption}/>
+                <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions}/>
+                <AddOption handleAddOption={this.handleAddOption}/>
             </div>
         );
     }
@@ -29,13 +71,10 @@ class Header extends React.Component {
 
 
 class Action extends React.Component {
-    handlePick() {
-        alert('handlePick');
-    }
     render() {
         return (
             <div>
-                <button onClick={this.handlePick}>what should i do?</button>
+                <button onClick={this.props.handlePickOption} disabled={!this.props.hasOptions}>what should i do?</button>
             </div>
         );
     }
@@ -43,19 +82,10 @@ class Action extends React.Component {
 
 
 class Options extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleRemoveAll = this.handleRemoveAll.bind(this);
-    }
-
-    handleRemoveAll() {
-        alert('handleRemoveAll');
-    }
-
     render() {
         return(
             <div>
-                <button onClick={this.handleRemoveAll}>Remove All</button>
+                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
                 {this.props.options.map((option) => <Option key={option} optionText={option} />) }
             </div>
         );
@@ -75,20 +105,29 @@ class Option extends React.Component {
 
 
 class AddOption extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.handleAddOption = this.handleAddOption.bind(this);
+        this.state = {
+            error: undefined
+        };
+    }
     handleAddOption(e) {
         e.preventDefault();
 
         const option = e.target.elements.option.value.trim();
+        const error = this.props.handleAddOption(option);
 
-        if (option) {
-            alert(option);
-        }
+        this.setState(() => {
+            return {error: error};
+        });
+        
     }
 
     render() {
         return(
             <div>
+                {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.handleAddOption}>
                     <input type="text" name="option" />
                     <button>add option</button>
@@ -98,5 +137,13 @@ class AddOption extends React.Component {
     }
 }
 
+const User = (props) => {
+    return (
+        <div>
+            <p>Name: {props.name}</p>
+            <p>Age: {props.age}</p>
+        </div>
+    );
+};
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<User name="Bruce" age={32} />, document.getElementById('app'));
