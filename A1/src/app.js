@@ -1,11 +1,5 @@
-// import './utilities.js';
-// import { square, add } from './utilities.js';
-import { isAdult, canDrink } from './person.js';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/main-app';
 
-
-console.log('app.js is running!');
-// console.log(square(4));
-// console.log(add(6, 20));
-
-console.log(isAdult(20));
-console.log(canDrink(20));
+ReactDOM.render(<App />, document.getElementById('app'));
