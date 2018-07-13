@@ -2,4 +2,6 @@ const isAdult = (n) => n >= 18;
 
 const canDrink = (n) => n >= 21;
 
-export { isAdult, canDrink };
+const isSenior = (n) => n >= 65;
+
+export { isAdult, canDrink, isSenior as default };
