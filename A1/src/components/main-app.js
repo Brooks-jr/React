@@ -5,18 +5,42 @@ import Action from './action';
 import Options from './options-list';
 
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
-        this.handlePickOption = this.handlePickOption.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.state = {
-            options: props.options
-        };
-    }
+export default class App extends React.Component {
+    state = {
+        options: []
+    };
 
+    // Method to delete all options
+    handleDeleteOptions = () => {
+        this.setState(() => ({ options: [] }));
+    };
+
+    // Method to delete a single option
+    handleDeleteOption = (optionToRemove) => {
+        this.setState((prevState) => ({ 
+            options: prevState.options.filter((option) => optionToRemove !== option)
+        }));
+    };
+
+    // Method to randomly select an option from the options array
+    handlePickOption = () => {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        alert(option);
+    };
+
+    // Method to add options into the options array
+    handleAddOption = (option) => {
+        if (!option) {
+            return 'Must enter a valid value';
+        }else if (this.state.options.indexOf(option) > -1) {
+            return 'Option already exist';
+        }
+
+        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
+    };
+
+    
     // Component lifecycle
     componentDidMount() {
         try {
@@ -42,35 +66,6 @@ class App extends React.Component {
         console.log('will unmount');
     }
 
-    // Method to delete all options
-    handleDeleteOptions() {
-        this.setState(() => ({ options: [] }));
-    }
-
-    // Method to delete a single option
-    handleDeleteOption(optionToRemove) {
-        this.setState((prevState) => ({ 
-            options: prevState.options.filter((option) => optionToRemove !== option)
-        }));
-    }
-
-    // Method to randomly select an option from the options array
-    handlePickOption() {
-        const randomNum = Math.floor(Math.random() * this.state.options.length);
-        const option = this.state.options[randomNum];
-        alert(option);
-    }
-
-    // Method to add options into the options array
-    handleAddOption(option) {
-        if (!option) {
-            return 'Must enter a valid value';
-        }else if (this.state.options.indexOf(option) > -1) {
-            return 'Option already exist';
-        }
-
-        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
-    }
 
     render() {
         const title = 'The Decidueye App';
@@ -97,5 +92,3 @@ class App extends React.Component {
 App.defaultProps = {
     options: []
 };
-
-export default App;
