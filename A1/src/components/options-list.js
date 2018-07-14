@@ -9,9 +9,9 @@ const Options = (props) => (
         {props.options.length === 0 && <p>Add an option to get started</p>}
         {
             props.options.map((option) => (
-                <Option 
-                    key={option} 
-                    optionText={option} 
+                <Option
+                    key={option}
+                    optionText={option}
                     handleDeleteOption={props.handleDeleteOption}
                 />
             ))

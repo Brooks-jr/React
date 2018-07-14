@@ -16,7 +16,7 @@ export default class App extends React.Component {
     handleDeleteOptions = () => {
         this.setState(() => ({ options: [] }));
     };
-    
+
     // Method to clear modal 
     handleClearModal = () => {
         this.setState(() => ({ selectedOption: undefined }));
@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
     // Method to delete a single option
     handleDeleteOption = (optionToRemove) => {
-        this.setState((prevState) => ({ 
+        this.setState((prevState) => ({
             options: prevState.options.filter((option) => optionToRemove !== option)
         }));
     };
@@ -33,14 +33,14 @@ export default class App extends React.Component {
     handlePickOption = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
-        this.setState(() => ({ selectedOption: option}));
+        this.setState(() => ({ selectedOption: option }));
     };
 
     // Method to add options into the options array
     handleAddOption = (option) => {
         if (!option) {
             return 'Must enter a valid value';
-        }else if (this.state.options.indexOf(option) > -1) {
+        } else if (this.state.options.indexOf(option) > -1) {
             return 'Option already exist';
         }
 
@@ -48,7 +48,7 @@ export default class App extends React.Component {
     };
 
 
-    
+
     // Component lifecycle
     componentDidMount() {
         try {
@@ -65,7 +65,7 @@ export default class App extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.options.length !== this.state.options.length) {
-            const json =JSON.stringify(this.state.options);
+            const json = JSON.stringify(this.state.options);
             localStorage.setItem('options', json);
         }
     }
@@ -79,31 +79,31 @@ export default class App extends React.Component {
         const title = 'The Decidueye App';
         const subtitle = 'Can\'t decide? Let my App do it!';
 
-        return(
+        return (
             <div>
-                <Header 
-                    title={title} 
-                    subtitle={subtitle} 
+                <Header
+                    title={title}
+                    subtitle={subtitle}
                 />
 
-                <Action 
-                    hasOptions={this.state.options.length > 0} 
+                <Action
+                    hasOptions={this.state.options.length > 0}
                     handlePickOption={this.handlePickOption}
                 />
 
-                <Options 
-                    options={this.state.options} 
-                    handleDeleteOptions={this.handleDeleteOptions} 
-                    handleDeleteOption={this.handleDeleteOption} 
+                <Options
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions}
+                    handleDeleteOption={this.handleDeleteOption}
                 />
 
-                <AddOption 
+                <AddOption
                     handleAddOption={this.handleAddOption}
                 />
 
                 <OptionModal
-                    selectedOption = {this.state.selectedOption}
-                    handleClearModal = {this.handleClearModal}
+                    selectedOption={this.state.selectedOption}
+                    handleClearModal={this.handleClearModal}
                 />
             </div>
         );
