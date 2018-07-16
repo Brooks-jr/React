@@ -1,0 +1,53 @@
+.cta {
+    width: 100%;
+    margin-bottom: $xlarge;
+    color: #fff;
+    padding: $medium $large;
+    font-size: $large;
+    font-weight: 200;
+    background: $primary-color-dark;
+    border: 1px solid $secondary-color;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    &:hover {
+        background: $secondary-color;
+    }
+
+    &:disabled {
+    color: $tertiary-color;
+    border-color: $tertiary-color; 
+
+        &:hover {
+            background: none;
+        }
+    }
+}
+
+.button {
+    color: #fff;
+    font-weight: 400;
+    padding: $small $medium;
+    background: none;
+    border: 1px solid $secondary-color;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 100px;
+
+    &:hover {
+        background: $secondary-color;
+    }
+    
+}
+
+.button--link {
+    border: none;
+    color: #fff;
+    padding: 0;
+
+    &:hover {
+        background: none;
+        color: $secondary-color;
+    }
+}

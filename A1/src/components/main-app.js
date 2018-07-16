@@ -76,8 +76,8 @@ export default class App extends React.Component {
 
 
     render() {
-        const title = 'The Decidueye App';
-        const subtitle = 'Can\'t decide? Let my App do it!';
+        const title = 'The Opt App';
+        const subtitle = 'Can\'t make up your mind? Let Opt App decide!';
 
         return (
             <div>
@@ -86,21 +86,26 @@ export default class App extends React.Component {
                     subtitle={subtitle}
                 />
 
-                <Action
-                    hasOptions={this.state.options.length > 0}
-                    handlePickOption={this.handlePickOption}
-                />
+                <div className="container">
+                    <Action
+                        hasOptions={this.state.options.length > 0}
+                        handlePickOption={this.handlePickOption}
+                    />
 
-                <Options
-                    options={this.state.options}
-                    handleDeleteOptions={this.handleDeleteOptions}
-                    handleDeleteOption={this.handleDeleteOption}
-                />
+                    <div className="widget">
+                        <Options
+                            options={this.state.options}
+                            handleDeleteOptions={this.handleDeleteOptions}
+                            handleDeleteOption={this.handleDeleteOption}
+                        />
 
-                <AddOption
-                    handleAddOption={this.handleAddOption}
-                />
+                        <AddOption
+                            handleAddOption={this.handleAddOption}
+                        />
+                    </div>
 
+                </div>
+                
                 <OptionModal
                     selectedOption={this.state.selectedOption}
                     handleClearModal={this.handleClearModal}
