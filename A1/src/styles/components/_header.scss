@@ -1,7 +1,7 @@
 .header {
     color: #fff;
     background: $primary-color-light;
-    margin-bottom: $xlarge;
+    margin-bottom: $medium;
     padding: $medium 0;
 }
 
@@ -21,4 +21,10 @@
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+@media (min-width: $desktop-bp) {
+    .header {
+        margin-bottom: $xlarge;
+    }
 }

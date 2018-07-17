@@ -8,8 +8,10 @@
         margin:0 0 $small 0;
         font-size: $large;
         flex-grow: 1;
-        background: none;
+        background: $primary-color-dark;
         border: none;
+        border-radius: 100px;
+        padding: 0 $medium;
         &::placeholder {
             color: lighten($primary-color-dark, 10%);
             text-align: center;

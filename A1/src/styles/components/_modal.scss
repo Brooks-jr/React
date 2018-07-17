@@ -20,6 +20,7 @@
 
 .modal {
     background: $primary-color-dark;
+    border-top: 4px solid $secondary-color;
     max-width: 30rem;
     outline: none;
     padding: $large;
