@@ -1,0 +1,28 @@
+
+html {
+    font-size: 62.5%;
+    cursor: crosshair;
+}
+
+body {
+    color: rgb(0, 0, 0);
+    font-family: $primary-font;
+    font-size: $medium;
+}
+
+button {
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.is-active {
+    font-weight: 500;
+    color: red;
+}
