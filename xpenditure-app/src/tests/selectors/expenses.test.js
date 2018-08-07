@@ -38,20 +38,20 @@ test('should filter by text value', () => {
 test('should filter by start date', () => {
     const filters = {
         text: '',
-        sotrtBy: 'date',
+        sortBy: 'date',
         startDate: moment(0),
         endDate: undefined
     };
 
     const result = selectExpenses(expenses, filters);
-    expect(result).toEqual([expenses[0], expenses[2]]);
+    expect(result).toEqual([expenses[2], expenses[0]]);
 });
 
 // END DATE FILTER TEST
 test('should filter by end date', () => {
     const filters = {
         text: '',
-        sotrtBy: 'date',
+        sortBy: 'date',
         startDate: undefined,
         endDate: moment(0).add(2, 'days')
     };
