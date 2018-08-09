@@ -3,12 +3,18 @@ import { connect } from 'react-redux';
 import ExpenseListItem from './expense-list-item';
 import selectExpenses from '../selectors/expenses';
 
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => (
     <div>
-        <h1>List of Expenses</h1>
-        {props.expenses.map((expense) => {
-            return <ExpenseListItem key={expense.id} {...expense} />
-        })}
+        {
+            props.expenses.length === 0 ? (
+                <p>No Expenses Added Yet.</p>
+            ) : (
+                    props.expenses.map((expense) => {
+                        return <ExpenseListItem key={expense.id} {...expense} />
+                    })
+                )
+        }
+
     </div>
 );
 
