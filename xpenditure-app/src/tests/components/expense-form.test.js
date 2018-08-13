@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import moment from 'moment';
 import ExpenseForm from '../../components/expense-form';
 import expenses from '../fixtures/expenses';
 
@@ -61,7 +62,7 @@ test('should not set amount if input is invalid', () => {
 
 test('should call onSubmit prop for valid form submission', () => {
     const onSubmitSpy = jest.fn();
-    const wrapper = shallow(<ExpenseForm expense={expenses[0]} onSubmit={onSubmitSpy}/>);
+    const wrapper = shallow(<ExpenseForm expense={expenses[0]} onSubmit={onSubmitSpy} />);
     wrapper.find('form').simulate('submit', {
         preventDefault: () => { }
     });
@@ -72,5 +73,12 @@ test('should call onSubmit prop for valid form submission', () => {
         note: expenses[0].note,
         createdAt: expenses[0].createdAt
     });
+});
+
+test('should set new date on date change', () => {
+    const now = moment();
+    const wrapper = shallow(<ExpenseForm />);
+    wrapper.find('SingleDatePicker').prop('onDateChange')(now);
+    expect(wrapper.state('createdAt')).toEqual(now);
 });
 
